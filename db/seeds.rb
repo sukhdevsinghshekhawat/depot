@@ -11,6 +11,6 @@ Product.delete_all
 Product.create!(
   title: 'Build Chatbot Interactions',
   description: %{<p><em>Responsive, Intuitive Interfaces with Ruby</em> ...</p>},
-  image_url: 'dpchat.jpg',
+  image_url: 'p1.jpg',
   price: 20.00
 )
