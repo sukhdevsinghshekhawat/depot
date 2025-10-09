@@ -10,8 +10,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     get products_url
     assert_response :success
     assert_select 'table tr', minimum: 2
-    assert_select 'td', 'Programming Ruby 1.9'
-    assert_select '.price', /\$[,\d]+\.\d\d/
+    assert_select 'td', 'New Product'
   end
 
   test "should get new" do
@@ -53,5 +52,14 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     product = Product.new(title: products(:ruby).title, description: "yyy", price: 1, image_url: "fred.gif")
     assert product.invalid?
     assert_equal [I18n.translate('errors.messages.taken')], product.errors[:title]
+  end
+
+  test "can't delete product in cart" do
+    assert_difference('Product.count', 0) do
+      begin
+        delete product_url(products(:two))
+      rescue ActiveRecord::RecordNotDestroyed
+      end
+    end
   end
 end

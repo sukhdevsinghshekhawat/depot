@@ -1,0 +1,11 @@
+one:
+  product: ruby
+  cart: one
+  quantity: 1
+  price: 49.50
+
+two:
+  product: rails
+  cart: one
+  quantity: 1
+  price: 59.00

@@ -9,16 +9,17 @@
   </head>
   <body>
     <header class="main">
-      <%= image_tag 'p1.jpg', alt: 'The Pragmatic Bookshelf' %>
+      <%= image_tag '', alt: 'The Pragmatic Bookshelf' %>
       <h1><%= @page_title %></h1>
     </header>
     <section class="content">
       <nav class="side_nav">
-        <aside class="sidebar">
-          <p><strong>Current time:</strong> <%= Time.now.strftime("%B %d, %Y %I:%M %p") %></p>
-        </aside>
+        <% if @cart %>
+          <div id="cart" class="carts">
+            <%= render @cart %>
+          </div>
+        <% end %>  
         <ul>
-          <li> <%= Time.now %> </li>
           <li><a href="/">Home</a></li>
           <li><a href="/questions">Questions</a></li>
           <li><a href="/news">News</a></li>

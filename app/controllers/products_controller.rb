@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.all
+    @products = Product.all.order(:title)
   end
 
   # GET /products/1 or /products/1.json
@@ -40,6 +40,9 @@ class ProductsController < ApplicationController
       if @product.update(product_params)
         format.html { redirect_to @product, notice: "Product was successfully updated.", status: :see_other }
         format.json { render :show, status: :ok, location: @product }
+        @products = Product.all.order(:title)
+        ActionCable.server.broadcast("products", { html: render_to_string(template: "stores/index", layout: false) })
+        # ActionCable.server.broadcast 'products', html: render_to_string(template: "stores/index", layout: false)
       else
         format.html { render :edit, status: :unprocessable_content }
         format.json { render json: @product.errors, status: :unprocessable_content }
@@ -49,10 +52,13 @@ class ProductsController < ApplicationController
 
   # DELETE /products/1 or /products/1.json
   def destroy
-    @product.destroy!
-    respond_to do |format|
-      format.html { redirect_to products_path, notice: "Product was successfully destroyed.", status: :see_other }
-      format.json { head :no_content }
+    if@product.destroy!
+      respond_to do |format|
+        format.html { redirect_to products_path, notice: "Product was successfully destroyed.", status: :see_other }
+        # format.json { head :no_content }
+      end
+    else
+      redirect_to products_url, alert: "Product cannot be deleted because it is in a cart."
     end
   end
 

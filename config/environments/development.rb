@@ -24,7 +24,8 @@ Rails.application.configure do
   else
     config.action_controller.perform_caching = false
   end
-
+  # config/environments/development.rb
+  config.action_cable.disable_request_forgery_protection = true
   # Change to :null_store to avoid any caching.
   config.cache_store = :memory_store
 
