@@ -2,6 +2,10 @@
   <aside id="notice"><%= notice %></aside>
 <% end %>
 <h1>Products</h1>
+<%= turbo_stream_from "products" %>  <!-- Real-time subscription -->
+<div id="products">
+  <%= render @products %>
+</div>
 <table>
   <tfoot>
     <tr>

@@ -53,6 +53,7 @@ class CartsController < ApplicationController
     session[:cart_id] = nil
     respond_to do |format|
       format.html { redirect_to store_index_url, notice: 'Your cart is currently empty' }
+      format.js
       format.json { head :no_content }
     end
  end
@@ -66,6 +67,7 @@ class CartsController < ApplicationController
     def cart_params
       params.fetch(:cart, {})
     end
+
     def invalid_cart
       logger.error "Attempt to access invalid cart #{params[:id]}"
       redirect_to store_index_url, notice: 'Invalid cart'

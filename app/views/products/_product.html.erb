@@ -1,22 +1,5 @@
-<div id="<%= dom_id product %>">
-  <p>
-    <strong>Title:</strong>
-    <%= product.title %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= product.description %>
-  </p>
-
-  <p>
-    <strong>Image url:</strong>
-    <%= product.image_url %>
-  </p>
-
-  <p>
-    <strong>Price:</strong>
-    <%= product.price %>
-  </p>
-
+<div id="<%= dom_id(product) %>" class="product-card transition">
+  <h2><%= product.title %></h2>
+  <p><%= number_to_currency(product.price) %></p>
+  <%= image_tag product.image_url, width: 150 if product.image_url.present? %>
 </div>

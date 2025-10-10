@@ -62,4 +62,4 @@ group :test do
 end
 
 gem "cssbundling-rails"
-
+gem "sass-rails", "~> 6.0"

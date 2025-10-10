@@ -1,6 +1,6 @@
 class LineItemsController < ApplicationController
   include CurrentCart
-  before_action :set_cart, only: [:create]
+  before_action :set_cart, only: [:create, :decrement]
   before_action :set_line_item, only: %i[ show edit update destroy ]
 
   # GET /line_items or /line_items.json
@@ -67,6 +67,20 @@ class LineItemsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to line_items_path, notice: "Line item was successfully destroyed.", status: :see_other }
       format.json { head :no_content }
+    end
+  end
+
+  def decrement
+    @line_item = LineItem.find(params[:id])
+    if @line_item.quantity > 1
+      @line_item.quantity -= 1
+      @line_item.save
+    else
+      @line_item.destroy
+    end
+    respond_to do |format|
+      format.html { redirect_to store_index_url }
+      format.js   # Ajax request ke liye
     end
   end
 

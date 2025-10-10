@@ -4,7 +4,9 @@ class Product < ApplicationRecord
 	validates :title, uniqueness: true, length: {minimum: 10, maximum: 30}
 	validates :image_url, allow_blank: true, format: {with: %r{\.(gif|jpg|png)\z}i, message: 'must be a URL for GIF, JPG or PNG image.'}
 	has_many :line_items
+	has_many :orders, through: :line_items
 	before_destroy :ensure_not_referenced_by_any_line_item
+	after_update_commit -> { broadcast_replace_to "products" }
   private
   def ensure_not_referenced_by_any_line_item
     unless line_items.empty?

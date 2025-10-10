@@ -13,15 +13,15 @@ two:
   created_at: <%= Time.now %>
 
 ruby:
-  title: Programming Ruby
+  title: Programming Ruby 1.9
   description: Ruby book
   price: 49.50
-  image_url: ruby.png
+  image_url: p2.png
   created_at: <%= Time.now %>
 
 rails:
   title: Rails Book
   description: Rails guide
   price: 59.00
-  image_url: rails.png
+  image_url: p2.png
   created_at: <%= Time.now %>

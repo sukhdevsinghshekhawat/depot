@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
-  resources :line_items
+  resources :orders
+  resources :line_items do
+    member do
+      patch :decrement
+    end
+  end
+  resources :products do
+    get :who_bought, on: :member
+  end
   resources :carts
   resources :products
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

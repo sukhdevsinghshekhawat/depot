@@ -1,0 +1,9 @@
+<h1>Who Bought <%= @product.title %></h1>
+<ul>
+  <% @product.orders.each do |order| %>
+    <li>
+      <strong><%= order.name %></strong> — <%= order.email %>  
+      (<%= order.pay_type %>)
+    </li>
+  <% end %>
+</ul>

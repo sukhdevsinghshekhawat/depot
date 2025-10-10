@@ -1,0 +1,9 @@
+<% if @line_item.destroyed? %>
+  $("#line_item_<%= @line_item.id %>").remove();
+<% else %>
+  $("#line_item_<%= @line_item.id %> .quantity").text("<%= @line_item.quantity %>");
+<% end %>
+
+<% if @cart.line_items.empty? %>
+  $("#cart").html("<p>Your cart is empty</p>");
+<% end %>

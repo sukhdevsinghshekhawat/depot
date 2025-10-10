@@ -1,5 +1,9 @@
-<tr>
-  <td class="quantity"><%= line_item.quantity %></td>
+<tr id="line_item_<%= line_item.id %>">
   <td><%= line_item.product.title %></td>
-  <td class="price"><%= number_to_currency(line_item.total_price) %></td>
+  <td class="quantity"><%= line_item.quantity %></td>
+  <td>
+    <!-- Decrement button for this specific item -->
+    <%= button_to "–", decrement_line_item_path(line_item), method: :patch, remote: true %>
+  </td>
 </tr>
+
